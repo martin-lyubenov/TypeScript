@@ -1,4 +1,6 @@
-function combine(input1, input2) {
+"use strict";
+function combine(input1, input2, literalType // literal type, we can force a param tobe one of 2 ( or more) values and types
+) {
     // adding a '|' makes atype union
     // with union types you have to add a runtime check as well
     if (typeof input1 === "number" && typeof input2 === "number") {
@@ -8,7 +10,13 @@ function combine(input1, input2) {
         return input1.toString() + input2.toLocaleString();
     }
 }
-var combinedAges = combine(30, 230);
+const combinedAges = combine(30, 230, "string1");
 console.log(combinedAges);
-var combinedNames = combine("Max", "Pesho");
+const combinedNames = combine("Max", "Pesho", "string1");
 console.log(combinedNames);
+function greet(user) {
+    console.log('Hi, I am ' + user.name);
+}
+function isOlder(user, checkAge) {
+    return checkAge > user.age;
+}

@@ -1,4 +1,4 @@
-function add(num1: number, num2: number, showResult: boolean, phrase: string) {
+function addApp(num1: number, num2: number, showResult: boolean, phrase: string) {
   const result = num1 + num2;
 
   if (showResult) {
@@ -8,10 +8,10 @@ function add(num1: number, num2: number, showResult: boolean, phrase: string) {
 
 const number1 = 5;
 const number2 = 2.8;
-const printResult = true;
+const printResultApp = true;
 const phrase = "Result is: ";
 
-add(number1, number2, printResult, phrase);
+addApp(number1, number2, printResultApp, phrase);
 
 // object
 

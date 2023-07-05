@@ -1,3 +1,4 @@
+"use strict";
 // TS can infer the type of return value - number, string, boolean etc...
 function add(n1, n2) {
     return n1 + n2;
@@ -8,17 +9,17 @@ function printResult(num) {
 }
 printResult(add(5, 10));
 // Function type
-var combineResult;
+let combineResult;
 combineResult = add; // you can assign any function
 // combineResult = 5; Error
 // spesific funciton type
-var combineResultFunctionType;
+let combineResultFunctionType;
 combineResultFunctionType = add;
 // combineResultFunctionType = printResult; Error, printResultdoes not meet the TS requirement
 function addHandler(number1, number2, cb) {
-    var result = number1 + number2;
+    const result = number1 + number2;
     cb(result);
 }
-addHandler(15, 10, function (result) {
+addHandler(15, 10, (result) => {
     console.log(result);
 });
