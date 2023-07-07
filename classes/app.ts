@@ -106,3 +106,29 @@ accounting.addReport("This report");
 accounting.mostRecentReport = "This is the last report";
 
 console.log(accounting.mostRecentReport);
+
+// singleton - to make sure to have exactly only one instance ( only one object ) of a class
+class singletonTest extends Department {
+  private static instance: singletonTest;
+
+  private constructor(id: string) {
+    super(id, "Singleton");
+  }
+
+  test(this: Department): void {
+    console.log("test");
+  }
+
+  static getInstace() {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new singletonTest("first");
+    return this.instance;
+  }
+}
+
+const singleton = singletonTest.getInstace();
+const singletontwo = singletonTest.getInstace();
+
+console.log(singletontwo, singletontwo);

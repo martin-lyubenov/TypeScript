@@ -104,3 +104,24 @@ var accounting = new AccountingDepartment("AC1", []);
 accounting.addReport("This report");
 accounting.mostRecentReport = "This is the last report";
 console.log(accounting.mostRecentReport);
+// singleton - to make sure to have exactly only one instance ( only one object ) of a class
+var singletonTest = /** @class */ (function (_super) {
+    __extends(singletonTest, _super);
+    function singletonTest(id) {
+        return _super.call(this, id, "Singleton") || this;
+    }
+    singletonTest.prototype.test = function () {
+        console.log("test");
+    };
+    singletonTest.getInstace = function () {
+        if (this.instance) {
+            return this.instance;
+        }
+        this.instance = new singletonTest("first");
+        return this.instance;
+    };
+    return singletonTest;
+}(Department));
+var singleton = singletonTest.getInstace();
+var singletontwo = singletonTest.getInstace();
+console.log(singletontwo, singletontwo);
