@@ -15,6 +15,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Department = /** @class */ (function () {
     //   #age: number; // new JS feature - private fields without the need of TS
+    //private  - only the current class has acces to the field using the this keyword ( iherited classes do not have access)
+    // protected - modifier that lets other other classes access the field outside people do not have access to the field
     //   constructor(name: string) {
     //     this.depName = name;
     //     this.employees = [];
@@ -24,6 +26,7 @@ var Department = /** @class */ (function () {
         this.id = id;
         this.name = name;
         this.employees = [];
+        // this.fiscalYear; cannot access static fields with the this keyword
     }
     // readonly - adds extra safety for fields that should not change
     Department.prototype.describe = function () {
@@ -36,6 +39,7 @@ var Department = /** @class */ (function () {
     Department.prototype.printEmployees = function () {
         console.log(this.employees);
     };
+    Department.fiscalYear = 200; // field only accessble through the class
     return Department;
 }());
 var department = new Department("D1", "Peshovci");
@@ -60,12 +64,36 @@ var itDepartment = new ITDepartment("IT1", ["Hulio", "Iglesias"]);
 console.log(itDepartment);
 var AccountingDepartment = /** @class */ (function (_super) {
     __extends(AccountingDepartment, _super);
-    function AccountingDepartment(id) {
+    function AccountingDepartment(id, reports) {
         var _this = _super.call(this, id, "Accounting") || this;
+        _this.reports = reports;
         _this.testBool = false;
+        _this.latestReport = reports[0];
         return _this;
     }
+    Object.defineProperty(AccountingDepartment.prototype, "mostRecentReport", {
+        get: function () {
+            if (this.latestReport) {
+                return this.latestReport;
+            }
+            throw new Error("No report available");
+        },
+        set: function (value) {
+            if (!value) {
+                throw new Error("No report available");
+            }
+            this.addReport(value);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    AccountingDepartment.prototype.addReport = function (report) {
+        this.reports.unshift(report);
+        this.latestReport = this.reports[0];
+    };
     return AccountingDepartment;
 }(Department));
-var accounting = new AccountingDepartment('AC1');
-console.log(accounting);
+var accounting = new AccountingDepartment("AC1", []);
+accounting.addReport('This report');
+accounting.mostRecentReport = 'This is the last report';
+console.log(accounting.mostRecentReport);
