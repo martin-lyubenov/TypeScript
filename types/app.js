@@ -1,32 +1,32 @@
-"use strict";
 function addApp(num1, num2, showResult, phrase) {
-    const result = num1 + num2;
+    var result = num1 + num2;
     if (showResult) {
         console.log(phrase + result);
     }
 }
-const number1 = 5;
-const number2 = 2.8;
-const printResultApp = true;
-const phrase = "Result is: ";
+var number1 = 5;
+var number2 = 2.8;
+var printResultApp = true;
+var phrase = "Result is: ";
 addApp(number1, number2, printResultApp, phrase);
 // object
-const person = {
+var person = {
     name: "John",
     age: 30,
     role: [2, 'admin']
 };
 console.log(person.name);
 // array
-let hobbies;
+var hobbies;
 hobbies = ['sports', 'athletes'];
 // better autocomplete
-for (const item of hobbies) {
+for (var _i = 0, hobbies_1 = hobbies; _i < hobbies_1.length; _i++) {
+    var item = hobbies_1[_i];
     console.log(item.toLocaleLowerCase());
     // item.map(item => item) GIVES error when you try to use an unsupported method
 }
 // tuple
-const personTwo = {
+var personTwo = {
     name: "John",
     age: 30,
     role: [2, 'admin'] // tuple
@@ -56,7 +56,7 @@ var RoleTestTwo;
     RoleTestTwo["AUTHOR"] = "Author";
 })(RoleTestTwo || (RoleTestTwo = {}));
 ; // you can assign unique value to each role
-const personThree = {
+var personThree = {
     name: "John",
     age: 30,
     role: Role.ADMIN,
@@ -65,5 +65,5 @@ if (personThree.role === Role.ADMIN) {
     console.log('is admin');
 }
 // any type - allows all types to be stored, not recommended as you lose the benefits of TS
-let anyArray;
+var anyArray;
 anyArray = [1, 'admin', null];
