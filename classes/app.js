@@ -39,16 +39,10 @@ var Department = /** @class */ (function () {
     Department.prototype.printEmployees = function () {
         console.log(this.employees);
     };
+    // abstract class can only be extended, cannot be instantiated
     Department.fiscalYear = 200; // field only accessble through the class
     return Department;
 }());
-var department = new Department("D1", "Peshovci");
-department.addEmployee("Gosho");
-department.addEmployee("Pesho");
-department.addEmployee("Marjika");
-department.describe();
-department.printEmployees();
-var copyDepartment = { describe: department.describe };
 // copyDepartment.describe() // no error but the log will be undefined rather than the name of the department due to the this keyword
 // you have to add this type in the class to get an error message and have extra type safety
 var ITDepartment = /** @class */ (function (_super) {
@@ -58,6 +52,9 @@ var ITDepartment = /** @class */ (function (_super) {
         _this.admins = admins;
         return _this;
     }
+    ITDepartment.prototype.test = function () {
+        console.log("Test");
+    };
     return ITDepartment;
 }(Department));
 var itDepartment = new ITDepartment("IT1", ["Hulio", "Iglesias"]);
@@ -91,9 +88,19 @@ var AccountingDepartment = /** @class */ (function (_super) {
         this.reports.unshift(report);
         this.latestReport = this.reports[0];
     };
+    AccountingDepartment.prototype.test = function () {
+        console.log("Test");
+    };
     return AccountingDepartment;
 }(Department));
+var department = new AccountingDepartment("D1", []);
+department.addEmployee("Gosho");
+department.addEmployee("Pesho");
+department.addEmployee("Marjika");
+department.describe();
+department.printEmployees();
+var copyDepartment = { describe: department.describe };
 var accounting = new AccountingDepartment("AC1", []);
-accounting.addReport('This report');
-accounting.mostRecentReport = 'This is the last report';
+accounting.addReport("This report");
+accounting.mostRecentReport = "This is the last report";
 console.log(accounting.mostRecentReport);

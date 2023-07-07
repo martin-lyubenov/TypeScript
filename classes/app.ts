@@ -1,5 +1,6 @@
-class Department {
-    static fiscalYear = 200; // field only accessble through the class
+abstract class Department {
+  // abstract class can only be extended, cannot be instantiated
+  static fiscalYear = 200; // field only accessble through the class
   private depName: string; // field, only declared, used later in the constructor, TS specific, you can also set default value with the = operator
   private employees: string[]; // private is a TS modifier that tells who has access to the fields
   //   #age: number; // new JS feature - private fields without the need of TS
@@ -24,6 +25,8 @@ class Department {
     console.log("Department: " + this.depName);
   }
 
+  abstract test(this: Department): void; // you can start a method or property in an abstract class but force the inheriting class to to implement it them individually
+
   addEmployee(employee: string) {
     this.employees.push(employee);
   }
@@ -33,23 +36,16 @@ class Department {
   }
 }
 
-const department = new Department("D1", "Peshovci");
-
-department.addEmployee("Gosho");
-department.addEmployee("Pesho");
-department.addEmployee("Marjika");
-
-department.describe();
-department.printEmployees();
-
-const copyDepartment = { describe: department.describe };
-
 // copyDepartment.describe() // no error but the log will be undefined rather than the name of the department due to the this keyword
 // you have to add this type in the class to get an error message and have extra type safety
 
 class ITDepartment extends Department {
   constructor(id: string, public admins: string[]) {
     super(id, "IT");
+  }
+
+  test() {
+    console.log("Test");
   }
 }
 
@@ -68,10 +64,9 @@ class AccountingDepartment extends Department {
     throw new Error("No report available");
   }
 
-  set mostRecentReport(value:string) {
-
+  set mostRecentReport(value: string) {
     if (!value) {
-        throw new Error("No report available");
+      throw new Error("No report available");
     }
 
     this.addReport(value);
@@ -87,12 +82,27 @@ class AccountingDepartment extends Department {
     this.reports.unshift(report);
     this.latestReport = this.reports[0];
   }
+
+  test() {
+    console.log("Test");
+  }
 }
+
+const department = new AccountingDepartment("D1", []);
+
+department.addEmployee("Gosho");
+department.addEmployee("Pesho");
+department.addEmployee("Marjika");
+
+department.describe();
+department.printEmployees();
+
+const copyDepartment = { describe: department.describe };
 
 const accounting = new AccountingDepartment("AC1", []);
 
-accounting.addReport('This report');
+accounting.addReport("This report");
 
-accounting.mostRecentReport = 'This is the last report';
+accounting.mostRecentReport = "This is the last report";
 
 console.log(accounting.mostRecentReport);
