@@ -22,3 +22,10 @@ function moveAnimal(animal) {
     }
     console.log(speed);
 }
+// Type casting
+var userInputElement = document.getElementById("userInput"); // we specify the type of element beforehand so TS knows what to expect 
+userInputElement.value = "Hi There";
+var errorBag = {
+    email: 'Hulqlqlql',
+    username: 'Hey, this is wrong and stuff!'
+};

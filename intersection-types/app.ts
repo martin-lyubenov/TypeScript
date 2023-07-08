@@ -45,3 +45,23 @@ function moveAnimal(animal: Animal) {
 
   console.log(speed);
 }
+
+// Type casting
+
+const userInputElement = document.getElementById(
+  "userInput"
+)! as HTMLInputElement; // we specify the type of element beforehand so TS knows what to expect 
+
+userInputElement.value = "Hi There";
+
+
+// Index types
+
+interface ErrorContainer {
+    [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+    email: 'Hulqlqlql',
+    username: 'Hey, this is wrong and stuff!'
+}
