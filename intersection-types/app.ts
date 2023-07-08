@@ -81,14 +81,20 @@ const result = addTogheter(5, 5);
 const stringResult = addTogheter("Hi", "There");
 stringResult.toLocaleLowerCase();
 
-// optional chaining 
+// optional chaining
 
-const fetchedUserData ={
-    id: 'u1',
-    name: 'Pesho',
-    job: {title: 'Gosho', desc: 'Gosho is the best and he knows it all'}
-}
-
+const fetchedUserData = {
+  id: "u1",
+  name: "Pesho",
+  job: { title: "Gosho", desc: "Gosho is the best and he knows it all" },
+};
 
 // we can add ? to tell TS that a property may not exsists and that it should be accesed only if it does
 console.log(fetchedUserData.job?.title);
+
+// nullish coalescing spelled like -> '??'
+const userInput = "";
+
+const storedData = userInput ?? "Default";
+
+console.log(storedData); // will log "" rather than "Default", if userInput was null or undefinded it would log "Default" instead
