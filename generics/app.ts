@@ -28,3 +28,28 @@ console.log(textStorage.getItems());
 const numberStorage = new DataStorage<number>();
 
 numberStorage.addData(10);
+
+// TS build in generic utility types
+// Partial utility type
+interface CourseGoal {
+  title: string;
+  description: string;
+  date: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.date = date;
+
+  return courseGoal as CourseGoal;
+}
+
+// Readyonly
+const namesArray: Readonly<string[]> = ["Pesho", "Gosho"];
+namesArray.push(); // even though it is valid JS throws an exception
