@@ -1,25 +1,15 @@
-// const names = ["Martin", "Lyubenov"];
-// generic typev- a type connected to another type - example - Array to string, number, union ( number | string), etc...
-var names = [];
-names[0].split(",");
-var numbers = [];
-numbers[0].toFixed(2);
-// generic type - promise
-var promist = new Promise(function (resolve, reject) {
-    setTimeout(function () {
-        resolve(15);
-    }, 1000);
-});
-promist.then(function (data) {
-    data.toFixed(2); // TS knows the return type because it was spesified with the generic type
-});
-var users = [];
-var user1 = {
-    name: "John",
-    age: 25,
-};
-var user2 = {
-    name: "Pesho",
-};
-users.push(user1);
-// users.push(user2); - throws an error
+// function merge(objA: object, objB: object) {
+//   return Object.assign(objA, objB);
+// }
+// const mergedObj = merge({ name: "Martin" }, { age: 33 }); //TS cannot tell the what properties are merged together you will not have type support for name or age
+// // you can use type case but it is cumbersome
+// const mergedObjTwo = merge({ name: "Martin" }, { age: 33 }) as {
+//   name: string;
+//   age: number;
+// };
+// mergedObjTwo.age;
+// generic merge
+function merge(objA, objB) {
+    return Object.assign(objA, objB);
+}
+var mergedObj3 = merge({ name: "Martin", hobbies: ["Sports"] }, { age: 33 });

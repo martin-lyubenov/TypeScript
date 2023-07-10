@@ -1,39 +1,18 @@
-// const names = ["Martin", "Lyubenov"];
+// function merge(objA: object, objB: object) {
+//   return Object.assign(objA, objB);
+// }
 
-// generic typev- a type connected to another type - example - Array to string, number, union ( number | string), etc...
-const names: Array<string> = [];
-names[0].split(",");
+// const mergedObj = merge({ name: "Martin" }, { age: 33 }); //TS cannot tell the what properties are merged together you will not have type support for name or age
+// // you can use type case but it is cumbersome
+// const mergedObjTwo = merge({ name: "Martin" }, { age: 33 }) as {
+//   name: string;
+//   age: number;
+// };
+// mergedObjTwo.age;
 
-const numbers: Array<number> = [];
-numbers[0].toFixed(2);
-
-// generic type - promise
-const promist: Promise<number> = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(15);
-  }, 1000);
-});
-
-promist.then((data) => {
-  data.toFixed(2); // TS knows the return type because it was spesified with the generic type
-});
-
-// you can combine generic types with interfaces and types
-interface Person {
-  name: string;
-  age: number;
+// generic merge
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
 }
 
-const users: Array<Person> = [];
-
-const user1: Person = {
-  name: "John",
-  age: 25,
-};
-
-const user2 = {
-  name: "Pesho",
-};
-
-users.push(user1);
-// users.push(user2); - throws an error
+const mergedObj3 = merge({ name: "Martin", hobbies: ["Sports"] }, { age: 33 });
