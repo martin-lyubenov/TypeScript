@@ -1,20 +1,35 @@
-// function merge(objA: object, objB: object) {
-//   return Object.assign(objA, objB);
-// }
-// const mergedObj = merge({ name: "Martin" }, { age: 33 }); //TS cannot tell the what properties are merged together you will not have type support for name or age
-// // you can use type case but it is cumbersome
-// const mergedObjTwo = merge({ name: "Martin" }, { age: 33 }) as {
-//   name: string;
-//   age: number;
-// };
-// mergedObjTwo.age;
-// generic merge
-// function merge<T extends object, U extends object>(objA: T, objB: U) {
-//     return Object.assign(objA)
-// }
-// const mergedObj3 = merge({ name: "Martin", hobbies: ["Sports"] }, { age: 33 });
-// keyof - you can use it to determine weather a generic type is the object key of another generic type
-function extratAndConvert(obj, key) {
-    console.log(obj[key]);
-}
-extratAndConvert({ name: 'Pesho' }, 'name');
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+var DataStorage = /** @class */ (function () {
+    function DataStorage() {
+        this.data = [];
+    }
+    DataStorage.prototype.addData = function (item) {
+        this.data.push(item);
+    };
+    DataStorage.prototype.removeItem = function (item) {
+        if (this.data.indexOf(item)) {
+            debugger;
+            this.data.splice(this.data.indexOf(item), 1);
+        }
+    };
+    DataStorage.prototype.getItems = function () {
+        return __spreadArray([], this.data, true);
+    };
+    return DataStorage;
+}());
+var textStorage = new DataStorage();
+textStorage.addData("Pesho");
+textStorage.addData("Gosho");
+textStorage.removeItem("Pesho");
+textStorage.removeItem("Marijka");
+console.log(textStorage.getItems());
+var numberStorage = new DataStorage();
+numberStorage.addData(10);
