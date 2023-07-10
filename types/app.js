@@ -67,3 +67,7 @@ if (personThree.role === Role.ADMIN) {
 // any type - allows all types to be stored, not recommended as you lose the benefits of TS
 var anyArray;
 anyArray = [1, 'admin', null];
+function merge(objA, objB) {
+    return Object.assign(objA, objB);
+}
+var mergedObj3 = merge({ name: "Martin", hobbies: ["Sports"] }, { age: 33 });

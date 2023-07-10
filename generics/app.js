@@ -9,7 +9,12 @@
 // };
 // mergedObjTwo.age;
 // generic merge
-function merge(objA, objB) {
-    return Object.assign(objA, objB);
+// function merge<T extends object, U extends object>(objA: T, objB: U) {
+//     return Object.assign(objA)
+// }
+// const mergedObj3 = merge({ name: "Martin", hobbies: ["Sports"] }, { age: 33 });
+// keyof - you can use it to determine weather a generic type is the object key of another generic type
+function extratAndConvert(obj, key) {
+    console.log(obj[key]);
 }
-var mergedObj3 = merge({ name: "Martin", hobbies: ["Sports"] }, { age: 33 });
+extratAndConvert({ name: 'Pesho' }, 'name');
