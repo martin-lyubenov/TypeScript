@@ -1,4 +1,3 @@
-// decorators are added to classes
 var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
     function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
     var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
@@ -38,38 +37,34 @@ var __setFunctionName = (this && this.__setFunctionName) || function (f, name, p
     return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
 };
 var _this = this;
-// decorator funciton
-function Logger(contstructor) {
-    console.log("loggin decorator");
-    console.log(contstructor);
-}
-// we can create a decorator generator so we can pass custom properties
-function LoggerGenerator(ConfigString) {
-    return function (contstructor) {
-        console.log(ConfigString);
+function WithTemplate(template, hookId) {
+    return function (constructor) {
+        var hookEl = document.querySelector(".app");
+        console.log(hookEl);
+        var p = new constructor();
+        if (hookEl) {
+            hookEl.innerHTML = template;
+            hookEl.querySelector("h1").textContent = p.name;
+        }
     };
 }
-// the decorator will run during the creation of the class, not when we instantiate new objects
-// @Logger // we use the @ to attach a decorator to a class - TS specific
-var Person = function () {
-    var _classDecorators = [LoggerGenerator("Random string")];
+var PersonHTML = function () {
+    var _classDecorators = [WithTemplate("<h1>Hello</h1>", "app")];
     var _classDescriptor;
     var _classExtraInitializers = [];
     var _classThis;
-    var Person = _classThis = /** @class */ (function () {
-        function Person_1() {
+    var PersonHTML = _classThis = /** @class */ (function () {
+        function PersonHTML_1() {
             this.name = "John";
             console.log("Constructor");
         }
-        return Person_1;
+        return PersonHTML_1;
     }());
-    __setFunctionName(_classThis, "Person");
+    __setFunctionName(_classThis, "PersonHTML");
     (function () {
         __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name }, null, _classExtraInitializers);
-        Person = _classThis = _classDescriptor.value;
+        PersonHTML = _classThis = _classDescriptor.value;
         __runInitializers(_classThis, _classExtraInitializers);
     })();
-    return Person = _classThis;
+    return PersonHTML = _classThis;
 }();
-var p1 = new Person();
-console.log(p1);
