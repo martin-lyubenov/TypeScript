@@ -1,13 +1,17 @@
 function WithTemplate(template: string, hookId: string) {
-  return function (constructor: any) {
-    const hookEl = document.querySelector(".app");
-    console.log(hookEl);
-
-    const p = new constructor();
-    if (hookEl) {
-      hookEl.innerHTML = template;
-      hookEl.querySelector("h1")!.textContent = p.name;
-    }
+  return function <T extends { new (...args: any[]): { name: string } }>(
+    originalConstructor: T
+  ) {
+    return class extends originalConstructor {
+      constructor(..._: any[]) {
+        super();
+        const hookEl = document.querySelector(".app");
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector("h1")!.textContent = this.name;
+        }
+      }
+    };
   };
 }
 
@@ -26,13 +30,15 @@ class PersonHTML {
   }
 }
 
+const u1 = new PersonHTML();
+
 // you can add decorators to properties, parameters, methods and accessors => setters/getters of a class
 function Log(target: any, propertyName: string | symbol) {
   console.log(target);
 }
 
 function Log2(
-    target: any,
+  target: any,
   name: string | Symbol,
   descriptor: PropertyDescriptor
 ) {
@@ -42,7 +48,7 @@ function Log2(
 }
 
 function Log3(
-    target: any,
+  target: any,
   name: string | Symbol,
   descriptor: PropertyDescriptor
 ) {

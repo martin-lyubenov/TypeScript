@@ -1,3 +1,18 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
     function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
     var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
@@ -38,14 +53,24 @@ var __setFunctionName = (this && this.__setFunctionName) || function (f, name, p
 };
 var _this = this;
 function WithTemplate(template, hookId) {
-    return function (constructor) {
-        var hookEl = document.querySelector(".app");
-        console.log(hookEl);
-        var p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("h1").textContent = p.name;
-        }
+    return function (originalConstructor) {
+        return /** @class */ (function (_super) {
+            __extends(class_1, _super);
+            function class_1() {
+                var _ = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    _[_i] = arguments[_i];
+                }
+                var _this = _super.call(this) || this;
+                var hookEl = document.querySelector(".app");
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector("h1").textContent = _this.name;
+                }
+                return _this;
+            }
+            return class_1;
+        }(originalConstructor));
     };
 }
 function Test(params) { }
@@ -71,21 +96,22 @@ var PersonHTML = function () {
     })();
     return PersonHTML = _classThis;
 }();
+var u1 = new PersonHTML();
 // you can add decorators to properties, parameters, methods and accessors => setters/getters of a class
-function Log(targe, propertyName) {
-    console.log(targe);
+function Log(target, propertyName) {
+    console.log(target);
 }
-function Log2(targe, name, descriptor) {
-    console.log(targe);
+function Log2(target, name, descriptor) {
+    console.log(target);
     console.log(name);
     console.log(descriptor);
 }
-function Log3(targe, name, descriptor) {
-    console.log(targe);
+function Log3(target, name, descriptor) {
+    console.log(target);
     console.log(name);
     console.log(descriptor);
 }
-function Log4(targe, name, position) { }
+function Log4(target, name, position) { }
 var Product = function () {
     var _a;
     var _instanceExtraInitializers = [];
