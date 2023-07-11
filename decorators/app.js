@@ -48,8 +48,11 @@ function WithTemplate(template, hookId) {
         }
     };
 }
+function Test(params) { }
+// you can add several decorators to a class
+// they execute bottom up - example WithTemplate will be first, Test second etc...
 var PersonHTML = function () {
-    var _classDecorators = [WithTemplate("<h1>Hello</h1>", "app")];
+    var _classDecorators = [Test, WithTemplate("<h1>Hello</h1>", "app")];
     var _classDescriptor;
     var _classExtraInitializers = [];
     var _classThis;
@@ -67,4 +70,56 @@ var PersonHTML = function () {
         __runInitializers(_classThis, _classExtraInitializers);
     })();
     return PersonHTML = _classThis;
+}();
+// you can add decorators to properties, parameters, methods and accessors => setters/getters of a class
+function Log(targe, propertyName) {
+    console.log(targe);
+}
+function Log2(targe, name, descriptor) {
+    console.log(targe);
+    console.log(name);
+    console.log(descriptor);
+}
+function Log3(targe, name, descriptor) {
+    console.log(targe);
+    console.log(name);
+    console.log(descriptor);
+}
+function Log4(targe, name, position) { }
+var Product = function () {
+    var _a;
+    var _instanceExtraInitializers = [];
+    var _title_decorators;
+    var _title_initializers = [];
+    var _set_price_decorators;
+    var _getPriceWithTax_decorators;
+    return _a = /** @class */ (function () {
+            function Product(title, price) {
+                this.title = (__runInitializers(this, _instanceExtraInitializers), __runInitializers(this, _title_initializers, void 0));
+                this.title = title;
+                this._price = price;
+            }
+            Object.defineProperty(Product.prototype, "price", {
+                set: function (value) {
+                    if (value > 0) {
+                        this._price = value;
+                    }
+                },
+                enumerable: false,
+                configurable: true
+            });
+            Product.prototype.getPriceWithTax = function (tax) {
+                return this._price * tax;
+            };
+            return Product;
+        }()),
+        (function () {
+            _title_decorators = [Log];
+            _set_price_decorators = [Log2];
+            _getPriceWithTax_decorators = [Log3];
+            __esDecorate(_a, null, _set_price_decorators, { kind: "setter", name: "price", static: false, private: false, access: { has: function (obj) { return "price" in obj; }, set: function (obj, value) { obj.price = value; } } }, null, _instanceExtraInitializers);
+            __esDecorate(_a, null, _getPriceWithTax_decorators, { kind: "method", name: "getPriceWithTax", static: false, private: false, access: { has: function (obj) { return "getPriceWithTax" in obj; }, get: function (obj) { return obj.getPriceWithTax; } } }, null, _instanceExtraInitializers);
+            __esDecorate(null, null, _title_decorators, { kind: "field", name: "title", static: false, private: false, access: { has: function (obj) { return "title" in obj; }, get: function (obj) { return obj.title; }, set: function (obj, value) { obj.title = value; } } }, _title_initializers, _instanceExtraInitializers);
+        })(),
+        _a;
 }();
